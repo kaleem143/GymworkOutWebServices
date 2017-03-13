@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GymBuddyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblNutritionPlan">
+          <Key>
+            <PropertyRef Name="nutritionID" />
+          </Key>
+          <Property Name="nutritionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nutritionName" Type="varchar" MaxLength="50" />
+          <Property Name="nutritionStart" Type="date" />
+          <Property Name="nutritionEnd" Type="date" />
+          <Property Name="carb" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="fat" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="saturatedFat" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="protien" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="sugar" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="nutritionDescription" Type="varchar(max)" />
+          <Property Name="userID" Type="int" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstName" Type="varchar" MaxLength="50" />
+          <Property Name="lastName" Type="varchar" MaxLength="50" />
+          <Property Name="userName" Type="varchar" MaxLength="50" />
+          <Property Name="phoneNO" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+          <Property Name="userType" Type="varchar" MaxLength="50" />
+          <Property Name="addressLine1" Type="varchar(max)" />
+          <Property Name="addressLine2" Type="varchar(max)" />
+          <Property Name="country" Type="varchar" MaxLength="50" />
+          <Property Name="city" Type="varchar" MaxLength="50" />
+          <Property Name="postCode" Type="varchar" MaxLength="50" />
+          <Property Name="coachID" Type="int" />
+          <Property Name="requestStatus" Type="int" />
+          <Property Name="nutritionStatus" Type="int" />
+        </EntityType>
+        <EntityType Name="tblWorkOutPlan">
+          <Key>
+            <PropertyRef Name="workOutID" />
+          </Key>
+          <Property Name="workOutID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="workOutType" Type="varchar" MaxLength="50" />
+          <Property Name="targetArea" Type="varchar" MaxLength="50" />
+          <Property Name="workOutStart" Type="date" />
+          <Property Name="workOutEnd" Type="date" />
+          <Property Name="workOutDuration" Type="int" />
+          <Property Name="workOutDescription" Type="varchar(max)" />
+          <Property Name="userID" Type="int" />
+        </EntityType>
+        <Association Name="FK_tblNutritionPlan_tblUser">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblNutritionPlan" Type="Self.tblNutritionPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="tblNutritionPlan">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblWorkOutPlan_tblUser">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblWorkOutPlan" Type="Self.tblWorkOutPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="tblWorkOutPlan">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GymBuddyModelStoreContainer">
+          <EntitySet Name="tblNutritionPlan" EntityType="Self.tblNutritionPlan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblWorkOutPlan" EntityType="Self.tblWorkOutPlan" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblNutritionPlan_tblUser" Association="Self.FK_tblNutritionPlan_tblUser">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblNutritionPlan" EntitySet="tblNutritionPlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblWorkOutPlan_tblUser" Association="Self.FK_tblWorkOutPlan_tblUser">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblWorkOutPlan" EntitySet="tblWorkOutPlan" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GymBuddyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblNutritionPlan">
+          <Key>
+            <PropertyRef Name="nutritionID" />
+          </Key>
+          <Property Name="nutritionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nutritionName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nutritionStart" Type="DateTime" Precision="0" />
+          <Property Name="nutritionEnd" Type="DateTime" Precision="0" />
+          <Property Name="carb" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="fat" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="saturatedFat" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="protien" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="sugar" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="nutritionDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="userID" Type="Int32" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK_tblNutritionPlan_tblUser" FromRole="tblNutritionPlan" ToRole="tblUser" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="phoneNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="userType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="addressLine1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="addressLine2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="postCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="coachID" Type="Int32" />
+          <Property Name="requestStatus" Type="Int32" />
+          <Property Name="nutritionStatus" Type="Int32" />
+          <NavigationProperty Name="tblNutritionPlans" Relationship="Self.FK_tblNutritionPlan_tblUser" FromRole="tblUser" ToRole="tblNutritionPlan" />
+          <NavigationProperty Name="tblWorkOutPlans" Relationship="Self.FK_tblWorkOutPlan_tblUser" FromRole="tblUser" ToRole="tblWorkOutPlan" />
+        </EntityType>
+        <EntityType Name="tblWorkOutPlan">
+          <Key>
+            <PropertyRef Name="workOutID" />
+          </Key>
+          <Property Name="workOutID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="workOutType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="targetArea" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="workOutStart" Type="DateTime" Precision="0" />
+          <Property Name="workOutEnd" Type="DateTime" Precision="0" />
+          <Property Name="workOutDuration" Type="Int32" />
+          <Property Name="workOutDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="userID" Type="Int32" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK_tblWorkOutPlan_tblUser" FromRole="tblWorkOutPlan" ToRole="tblUser" />
+        </EntityType>
+        <Association Name="FK_tblNutritionPlan_tblUser">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblNutritionPlan" Type="Self.tblNutritionPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="tblNutritionPlan">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblWorkOutPlan_tblUser">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblWorkOutPlan" Type="Self.tblWorkOutPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="tblWorkOutPlan">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GymBuddyDb" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblNutritionPlans" EntityType="Self.tblNutritionPlan" />
+          <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+          <EntitySet Name="tblWorkOutPlans" EntityType="Self.tblWorkOutPlan" />
+          <AssociationSet Name="FK_tblNutritionPlan_tblUser" Association="Self.FK_tblNutritionPlan_tblUser">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblNutritionPlan" EntitySet="tblNutritionPlans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblWorkOutPlan_tblUser" Association="Self.FK_tblWorkOutPlan_tblUser">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblWorkOutPlan" EntitySet="tblWorkOutPlans" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GymBuddyModelStoreContainer" CdmEntityContainer="GymBuddyDb">
+          <EntitySetMapping Name="tblNutritionPlans">
+            <EntityTypeMapping TypeName="GymBuddyModel.tblNutritionPlan">
+              <MappingFragment StoreEntitySet="tblNutritionPlan">
+                <ScalarProperty Name="nutritionID" ColumnName="nutritionID" />
+                <ScalarProperty Name="nutritionName" ColumnName="nutritionName" />
+                <ScalarProperty Name="nutritionStart" ColumnName="nutritionStart" />
+                <ScalarProperty Name="nutritionEnd" ColumnName="nutritionEnd" />
+                <ScalarProperty Name="carb" ColumnName="carb" />
+                <ScalarProperty Name="fat" ColumnName="fat" />
+                <ScalarProperty Name="saturatedFat" ColumnName="saturatedFat" />
+                <ScalarProperty Name="protien" ColumnName="protien" />
+                <ScalarProperty Name="sugar" ColumnName="sugar" />
+                <ScalarProperty Name="nutritionDescription" ColumnName="nutritionDescription" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUsers">
+            <EntityTypeMapping TypeName="GymBuddyModel.tblUser">
+              <MappingFragment StoreEntitySet="tblUser">
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="phoneNO" ColumnName="phoneNO" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="userType" ColumnName="userType" />
+                <ScalarProperty Name="addressLine1" ColumnName="addressLine1" />
+                <ScalarProperty Name="addressLine2" ColumnName="addressLine2" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="postCode" ColumnName="postCode" />
+                <ScalarProperty Name="coachID" ColumnName="coachID" />
+                <ScalarProperty Name="requestStatus" ColumnName="requestStatus" />
+                <ScalarProperty Name="nutritionStatus" ColumnName="nutritionStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblWorkOutPlans">
+            <EntityTypeMapping TypeName="GymBuddyModel.tblWorkOutPlan">
+              <MappingFragment StoreEntitySet="tblWorkOutPlan">
+                <ScalarProperty Name="workOutID" ColumnName="workOutID" />
+                <ScalarProperty Name="workOutType" ColumnName="workOutType" />
+                <ScalarProperty Name="targetArea" ColumnName="targetArea" />
+                <ScalarProperty Name="workOutStart" ColumnName="workOutStart" />
+                <ScalarProperty Name="workOutEnd" ColumnName="workOutEnd" />
+                <ScalarProperty Name="workOutDuration" ColumnName="workOutDuration" />
+                <ScalarProperty Name="workOutDescription" ColumnName="workOutDescription" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cb7a1240eaa448ff9a06554bda362926" Name="Diagram1">
+        <EntityTypeShape EntityType="GymBuddyModel.tblNutritionPlan" Width="1.5" PointX="6" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GymBuddyModel.tblUser" Width="1.5" PointX="3.875" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GymBuddyModel.tblWorkOutPlan" Width="1.5" PointX="2" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="GymBuddyModel.FK_tblNutritionPlan_tblUser" ManuallyRouted="false" />
+        <AssociationConnector Association="GymBuddyModel.FK_tblWorkOutPlan_tblUser" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
