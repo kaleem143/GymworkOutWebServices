@@ -133,6 +133,21 @@ namespace GymBuddy.Controllers
             return Ok(user);
         }
         [HttpGet]
+        [ResponseType(typeof(tblUser))]
+        [ActionName("getListClients")]
+        public IHttpActionResult getlistClient(int  coachId)
+        {
+            var coach = from c in db.tblUsers
+                        where c.coachID==coachId && c.userType=="client"
+                        select c.firstName + " " +c.lastName;
+            if (coach == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(coach);
+        }
+        [HttpGet]
         [ActionName("isverifieduser")]
         public IHttpActionResult getUserByUserName(string email,string password)
         {
@@ -143,10 +158,9 @@ namespace GymBuddy.Controllers
             }
          
                 return Ok(user);
-            
-
-            
+              
         }
+
 
 
         protected override void Dispose(bool disposing)
