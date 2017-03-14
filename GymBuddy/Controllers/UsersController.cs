@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using GymBuddy.Models;
+using System.Data.Entity.Core.Objects;
 
 namespace GymBuddy.Controllers
 {
@@ -23,6 +24,18 @@ namespace GymBuddy.Controllers
         {
             return db.tblUsers;
         }
+        /*
+         * api/users/addRemoveClient?id=2&requestcode=2
+        return 0 for no updation
+        return 1 for successful update */
+        [HttpPut]
+        [ActionName("addRemoveClient")]
+        public int apporveUser(int  id,int requestcode)
+        {
+            var username = new ObjectParameter("userName", typeof(string));
+            return db.pro_approveClient1(id, requestcode,username);
+            
+        }
 
         // GET: api/Users/5
         [ResponseType(typeof(tblUser))]
@@ -36,11 +49,11 @@ namespace GymBuddy.Controllers
 
             return Ok(tblUser);
         }
+      
 
-        
 
 
-        // PUT: api/Users/5
+        [ActionName("updateUser")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PuttblUser(int id, tblUser tblUser)
         {

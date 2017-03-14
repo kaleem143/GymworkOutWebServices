@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="GymBuddyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="GymBuddyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tblNutritionPlan">
           <Key>
             <PropertyRef Name="nutritionID" />
@@ -79,6 +79,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="pro_approveClient1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="clientID" Type="int" Mode="In" />
+          <Parameter Name="requestStatus" Type="int" Mode="In" />
+          <Parameter Name="username" Type="varchar" Mode="InOut" />
+        </Function>
         <EntityContainer Name="GymBuddyModelStoreContainer">
           <EntitySet Name="tblNutritionPlan" EntityType="Self.tblNutritionPlan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
@@ -92,8 +97,7 @@
             <End Role="tblWorkOutPlan" EntitySet="tblWorkOutPlan" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GymBuddyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -187,6 +191,11 @@
             <End Role="tblUser" EntitySet="tblUsers" />
             <End Role="tblWorkOutPlan" EntitySet="tblWorkOutPlans" />
           </AssociationSet>
+          <FunctionImport Name="pro_approveClient1">
+            <Parameter Name="clientID" Mode="In" Type="Int32" />
+            <Parameter Name="requestStatus" Mode="In" Type="Int32" />
+            <Parameter Name="username" Mode="InOut" Type="String" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -247,6 +256,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="pro_approveClient1" FunctionName="GymBuddyModel.Store.pro_approveClient1" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
